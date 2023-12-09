@@ -11,7 +11,11 @@ export async function create(user: IUser) {
       });
 
       if(response.status == 201) {
-        setUserLocalStorage(user);
+        setUserLocalStorage({
+          name: response?.data?.newUser?.name,
+          email:  response?.data?.newUser?.email,
+          id: response?.data?.newUser?.id,
+        });
         return response;
       }
       
@@ -27,7 +31,11 @@ export async function login(userLogin: IUserLogin) {
     });
 
     if(response.status == 200) {
-      setUserLocalStorage(userLogin);
+      setUserLocalStorage({
+        name: response?.data?.user?.name,
+        email: response?.data?.user?.email,
+        id: response?.data?.user?.id,
+      });
       return response;
     }
     

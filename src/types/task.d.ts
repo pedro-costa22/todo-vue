@@ -3,3 +3,9 @@ export default interface ITask {
   category: string;
   pending: boolean;
 }
+
+export default interface INewTask {
+  name: string;
+  description: string;
+  categoryId: string | number;
+}

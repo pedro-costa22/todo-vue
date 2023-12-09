@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import BaseContainer from "../components/BaseContainer.vue";
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { IUserLogin } from "../types/user";
 import { login } from "../services/auth";
 import { useRouter } from 'vue-router';
+import { getUserLocalStorage } from "../services/utils";
 
 const router = useRouter();
 
@@ -41,6 +42,12 @@ async function loginFn() {
     console.log(error);
   }
 }
+
+onBeforeMount(() => {
+  if (getUserLocalStorage() !== null) {
+    router.push('/tasks');
+  }
+});
 
 </script>
 

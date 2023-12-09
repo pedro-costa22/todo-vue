@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onBeforeMount } from 'vue';
 import BaseContainer from "../components/BaseContainer.vue";
 import { IUser } from '../types/user';
 import { create } from '../services/auth';
 import { useRouter } from 'vue-router';
+import { getUserLocalStorage } from '../services/utils';
 
 const router = useRouter();
 
@@ -66,6 +67,12 @@ watch(popUp, () => {
   return alert(`${popUp.value.message}`);
 }, {
   deep: true,
+});
+
+onBeforeMount(() => {
+  if (getUserLocalStorage() !== null) {
+    router.push('/tasks');
+  }
 });
 
 
